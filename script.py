@@ -3,6 +3,16 @@ import sys
 import pandas as pd
 import yaml
 
+def load_service_mapping():
+	"""Load the Morse to Shannon service ID mapping."""
+	try:
+		mapping_df = pd.read_csv('morse_to_shannon_service_mapping.csv')
+		# Create a dictionary mapping Morse Chain IDs to Shannon Service IDs
+		return dict(zip(mapping_df['Morse_Chain_Id'], mapping_df['Shannon_Service_id']))
+	except Exception as e:
+		print(f"Error loading service mapping: {e}")
+		return {}
+
 def get_service_details(owner_address):
 	"""Get service details from owner-specific CSV file if it exists."""
 	details_file = f"{owner_address}.csv"
@@ -19,9 +29,20 @@ def get_service_details(owner_address):
 			print(f"Warning: Error reading {details_file}: {e}")
 	return {}
 
+def extract_morse_chain_id(service_id):
+	"""Extract Morse Chain ID from service ID string (e.g., 'Avalanche (F003)' -> 'F003')."""
+	import re
+	match = re.search(r'\(([A-F0-9]{4})\)', service_id)
+	return match.group(1) if match else None
+
 def main():
 	# Create output directory if it doesn't exist
 	os.makedirs('output', exist_ok=True)
+	
+	# Load service ID mapping
+	service_mapping = load_service_mapping()
+	if not service_mapping:
+		print("Warning: Could not load service mapping. Using original service IDs.")
 	
 	df = pd.read_csv('NodeAllocation.csv')
  
@@ -52,7 +73,12 @@ def main():
 		# Add services for this owner
 		for index, row in df.iterrows():
 			if row[owner_address] != 0:
-				service_id = row[0]
+				original_service_id = row[0]
+				morse_chain_id = extract_morse_chain_id(original_service_id)
+				
+				# Use Shannon service ID if mapping exists, otherwise use original
+				service_id = service_mapping.get(morse_chain_id, original_service_id)
+				
 				service = {
 					'service_id': service_id,
 					'endpoints': [{
@@ -62,8 +88,8 @@ def main():
 				}
 				
 				# Update service details if available from CSV
-				if service_id in service_details:
-					details = service_details[service_id]
+				if original_service_id in service_details:
+					details = service_details[original_service_id]
 					service['endpoints'][0].update({
 						'publicly_exposed_url': details['publicly_exposed_url'],
 						'rpc_type': details['rpc_type']
