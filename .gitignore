@@ -1,1 +1,4 @@
 output/*
+.env
+initial-stake-files/*
+proto/*
