@@ -48,7 +48,7 @@ def stake_wallet(wallet_data, config_file, network):
     """Execute the stake supplier command using the CLI."""
     cmd = [
         "pocketd", "tx", "supplier", wallet_data['customer_id'],
-        "--config", config_file,
+        f"--config={config_file}",
         f"--from={wallet_data['owner_address']}",
         "--gas=auto",
         "--gas-prices=1upokt",
