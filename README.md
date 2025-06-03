@@ -7,7 +7,7 @@ This script generates YAML configuration files for POKT node allocations based o
 ### 1. Main Allocation CSV (`NodeAllocation.csv`)
 
 The main CSV file should have the following structure:
-- First 3 columns: Service ID, Node Type, Stake Nodes
+- First 3 columns: Service ID (in format "Chain Name (Morse_Chain_Id)"), Node Type, Stake Nodes
 - Remaining columns: Owner addresses (column headers should be the owner addresses)
 - Values in the matrix: Number of nodes allocated (0 means no allocation)
 
@@ -18,12 +18,27 @@ Avalanche (F003),HTC,1,1,0,1
 Avalanche-DFK (F004),HTC,1,0,1,1
 ```
 
-### 2. Service Detail CSV Files (Optional)
+### 2. Service ID Mapping CSV (`morse_to_shannon_service_mapping.csv`)
+
+Required file that maps Morse Chain IDs to Shannon Service IDs:
+
+Required columns:
+- `Morse_Chain_Id`: The 4-character Morse Chain ID (e.g., "F003")
+- `Shannon_Service_id`: The corresponding Shannon Service ID (e.g., "avax")
+
+Example:
+```csv
+Morse_Chain_Id,Shannon_Service_id
+F003,avax
+F004,avax
+```
+
+### 3. Service Detail CSV Files (Optional)
 
 For each owner address, you can provide a CSV file named `{owner_address}.csv` (e.g., `1.csv`) with specific service details:
 
 Required columns:
-- `service_id`: Must match the service_id from the main allocation CSV
+- `service_id`: Must match the service_id from the main allocation CSV (including the Morse Chain ID)
 - `publicly_exposed_url`: The public URL for the service
 - `rpc_type`: The RPC type (e.g., "JSON_RPC")
 - `operator_address`: The operator address for this service
@@ -47,7 +62,7 @@ default_rev_share_percent:
   "1": 50
   "1_operator": 50
 services:
-  - service_id: "Avalanche (F003)"
+  - service_id: "avax"  # Shannon Service ID from mapping
     endpoints:
       - publicly_exposed_url: "https://relayminer1.example.com"  # From CSV if available
         rpc_type: "JSON_RPC"  # From CSV if available
@@ -70,6 +85,7 @@ pip install pandas pyyaml
 
 1. Prepare your CSV files:
    - Create `NodeAllocation.csv` with the main allocation matrix
+   - Ensure `morse_to_shannon_service_mapping.csv` exists with the service ID mapping
    - Optionally create service detail CSV files for each owner (e.g., `1.csv`, `2.csv`, etc.)
 
 2. Run the script:
@@ -81,7 +97,9 @@ python script.py
 
 ## Notes
 
+- The script will convert Morse Chain IDs to Shannon Service IDs in the output YAML files
 - If a service detail CSV file is not provided for an owner, default values will be used
 - For non-HTC node types, a custom rev_share_percent will be set (0% owner, 100% operator)
 - The script will create an `output` directory if it doesn't exist
-- Any errors reading service detail CSV files will be reported but won't stop the script 
+- Any errors reading service detail CSV files will be reported but won't stop the script
+- If the service mapping file cannot be loaded, the script will use original service IDs 
