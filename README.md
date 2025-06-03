@@ -12,6 +12,11 @@ The repository contains the following scripts that should be used in sequence:
 4. `generate_supplier_config.py`: Generates YAML configuration files for suppliers
 5. `stake_from_supplier_config.py`: Executes the final staking step using the generated supplier configurations
 
+## Install Dependencies
+```bash
+pip install -r requirements.txtx
+```
+
 ## Recommended Workflow
 
 Follow these steps in order to set up your POKT nodes:
