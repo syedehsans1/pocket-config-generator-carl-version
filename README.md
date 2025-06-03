@@ -14,7 +14,7 @@ The repository contains the following scripts that should be used in sequence:
 
 ## Install Dependencies
 ```bash
-pip install -r requirements.txtx
+pip install -r requirements.txt
 ```
 
 ## Recommended Workflow
