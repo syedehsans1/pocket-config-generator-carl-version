@@ -7,7 +7,7 @@ import subprocess
 from google.protobuf.message import Message
 import json
 from dotenv import load_dotenv
-
+import time
 
 def read_wallets(csv_file):
     wallets = []
@@ -30,7 +30,7 @@ def generate_stake_config(wallet_data, template_file):
     config_dict = yaml.safe_load(config)
     config_dict['default_rev_share_percent'] = {
         wallet_data['owner_address']: 50,
-        wallet_data['operator_address']: 50
+        wallet_data['revshare_address']: 50
     }
     
     # Create directory if it doesn't exist
@@ -47,14 +47,15 @@ def generate_stake_config(wallet_data, template_file):
 def stake_wallet(wallet_data, config_file, network):
     """Execute the stake supplier command using the CLI."""
     cmd = [
-        "pocketd", "tx", "supplier", wallet_data['customer_id'],
+        "pocketd", "tx", "supplier", "stake-supplier",
         f"--config={config_file}",
         f"--from={wallet_data['owner_address']}",
         "--gas=auto",
         "--gas-prices=1upokt",
         "--gas-adjustment=1.5",
         "--yes",
-        f"--network={network}"
+        f"--network={network}",
+        "--keyring-backend=test", "--unordered", "--timeout-duration=1m"
     ]
     
     try:
@@ -80,7 +81,7 @@ def main():
     network = os.getenv('NETWORK')
     
     if not network:
-        print("Error: NETWORK and RPC_ENDPOINT environment variables must be set in .env file")
+        print("Error: NETWORK environment variable must be set in .env file")
         return
     
     # Read wallets
@@ -94,6 +95,8 @@ def main():
         try:
             # stake the wallet
             success = stake_wallet(wallet, config_file, network)
+            # wait for 30 seconds
+            # time.sleep(15)
             # os.remove(config_file)
             if not success:
                 print(f"Failed to stake for {wallet['operator_address']}")
