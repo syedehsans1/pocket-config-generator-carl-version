@@ -1,3 +1,0 @@
-service_id,publicly_exposed_url,rpc_type,operator_address
-Avalanche (F003),https://relayminer1.example.com,JSON_RPC,1_operator_test
-Avalanche-DFK (F004),https://relayminer2.example.com,JSON_RPC,1_operator_test

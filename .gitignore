@@ -2,3 +2,8 @@ output/*
 .env
 initial-stake-files/*
 proto/*
+node_modules
+node_modules/*
+venv
+venv/*
+*.csv

@@ -7,5 +7,5 @@ default_rev_share_percent:
 services:
   - service_id: "anvil"
     endpoints:
-      - publicly_exposed_url: relayminer.example.com
+      - publicly_exposed_url: https://relayminer.example.com
         rpc_type: JSON_RPC
