@@ -77,7 +77,8 @@ def main():
         print("Please answer 'yes' or 'no'")
     
     # Get list of YAML files in the output directory
-    output_dir = 'output'
+    foldername = input("Enter foldername to read supplier config yaml files from: ")
+    output_dir = foldername
     if not os.path.exists(output_dir):
         print(f"Error: {output_dir} directory not found")
         return
