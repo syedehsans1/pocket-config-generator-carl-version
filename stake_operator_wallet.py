@@ -85,7 +85,9 @@ def main():
         return
     
     # Read wallets
-    wallets = read_wallets('supplier_stake_info.csv')
+    filename = input("Enter filename to read wallets from: ")
+	
+    wallets = read_wallets(filename)
     
     # Process each wallet
     for wallet in wallets:
