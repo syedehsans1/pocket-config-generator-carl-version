@@ -50,7 +50,8 @@ def main():
 		sys.exit(1)
 	
 	# Read NodeAllocation.csv
-	df = pd.read_csv('NodeAllocation.csv')
+	filename = input("Enter your F-Chains allocation spreadsheat provided by PNF: ")
+	df = pd.read_csv(filename)
  
 	# drop last column from df
 	df = df.iloc[:, :-1]
