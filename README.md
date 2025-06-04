@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ```
 
 ## Recommended Workflow
-
+## Owner
 Follow these steps in order to set up your POKT nodes:
 
 ### 1. Create Accounts
@@ -42,7 +42,7 @@ This script will:
 
 ### 3. Stake Operator Wallets
 
-## Owner address needs to be in the local keyring, the account has to be funded as well
+### Owner address needs to be in the local keyring, the account has to be funded as well
 ```bash
 pocketd keys add owner --recover --keyring-backend=test
 ```
@@ -56,6 +56,8 @@ This script will:
 - Execute stake commands for each operator wallet
 - Requires a `.env` file with `NETWORK` variable set
 
+
+## Operator
 ### 4. Generate Supplier Configurations
 ```bash
 python generate_supplier_config.py
@@ -80,6 +82,7 @@ Note: This final step can be performed by either the owner or operator:
 - If run as owner: Uses the owner address for staking
 - If run as operator: Uses the operator address for staking
 - The script will automatically select the correct address based on your role
+
 
 ## Required Files
 
