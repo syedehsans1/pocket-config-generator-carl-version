@@ -41,6 +41,12 @@ This script will:
 - Use the test keyring backend
 
 ### 3. Stake Operator Wallets
+
+## Owner address needs to be in the local keyring, the account has to be funded as well
+```bash
+pocketd keys add owner --recover --keyring-backend=test
+```
+
 ```bash
 python stake_operator_wallet.py
 ```
