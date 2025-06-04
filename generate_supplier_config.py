@@ -16,7 +16,7 @@ def load_service_mapping():
 def load_wallet_data():
 	"""Load wallet information from provided filename."""
 	try:
-		filename = input("Enter filename to read wallets from: ")
+		filename = input("Enter the filename to read the wallets information from (Case-sensitive):")
 		wallets_df = pd.read_csv(filename)
 		# Create a dictionary mapping customer_id to wallet details
 		return {row['customer_id']: {
@@ -50,7 +50,7 @@ def main():
 		sys.exit(1)
 	
 	# Read NodeAllocation.csv
-	filename = input("Enter your F-Chains allocation spreadsheat provided by PNF: ")
+	filename = input("Enter the csv received from PNF with the F-Chains node allocations (Case-sensitive): ")
 	df = pd.read_csv(filename)
  
 	# drop last column from df
