@@ -7,7 +7,7 @@ import json
 
 def generate_pocket_accounts(num_accounts, customer_prefix):
     # Resolve output file path to ~/pocket_accounts.csv
-    output_path = Path("pocket_accounts1.csv").expanduser()
+    output_path = Path("pocket_accounts.csv").expanduser()
     
     # Configure the network (using Pocket Network testnet)
     # network = NetworkConfig(
