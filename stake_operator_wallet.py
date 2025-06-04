@@ -85,7 +85,7 @@ def main():
         return
     
     # Read wallets
-    wallets = read_wallets('pocket_accounts.csv')
+    wallets = read_wallets('supplier_stake_info.csv')
     
     # Process each wallet
     for wallet in wallets:
