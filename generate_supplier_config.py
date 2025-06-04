@@ -14,9 +14,9 @@ def load_service_mapping():
 		return {}
 
 def load_wallet_data():
-	"""Load wallet information from wallets.csv."""
+	"""Load wallet information from pocket_accounts.csv."""
 	try:
-		wallets_df = pd.read_csv('wallets.csv')
+		wallets_df = pd.read_csv('pocket_accounts.csv')
 		# Create a dictionary mapping customer_id to wallet details
 		return {row['customer_id']: {
 			'operator_address': row['operator_address'],
