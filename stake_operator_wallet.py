@@ -87,7 +87,7 @@ def main():
     
     # Read wallets
     filename = input("Enter filename to read wallets from (Case-Sensitive): ")
-    stake_amount = int(input("Enter stake amount in upokt (1POKT=1000000upokt): "))
+    stake_amount = input("Enter stake amount in upokt (1POKT=1000000upokt): ")
 	
     wallets = read_wallets(filename)
     
