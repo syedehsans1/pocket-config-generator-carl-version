@@ -25,7 +25,7 @@ def generate_stake_config(wallet_data, template_file, stake_amount):
     # Replace placeholders
     config = template.replace('<owner_address>', wallet_data['owner_address'])
     config = config.replace('<operator_address>', wallet_data['operator_address'])
-    config = config.replace('<stake_amount>', f"{stake_amount}")
+    config = config.replace('<stake_amount>', f"{stake_amount * 1000000}")
     
     # Parse as YAML to handle the rev share percentages
     config_dict = yaml.safe_load(config)
