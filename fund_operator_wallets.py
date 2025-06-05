@@ -70,7 +70,7 @@ def main():
     # Get funding amount from user
     while True:
         try:
-            amount = input("Enter the amount of upokt to send to each operator (1POKT=1000000UPOKT): ")
+            amount = input("Enter the amount of POKT to send to each operator: ")
             # Validate that amount is a positive number
             amount_float = int(amount)
             if amount_float <= 0:
@@ -84,7 +84,7 @@ def main():
     
     for owner_address, operator_address in addresses:
         print(f"\nProcessing transfer from {owner_address} to {operator_address}")
-        send_funds(owner_address, operator_address, amount)
+        send_funds(owner_address, operator_address, amount*1000000)
 
 if __name__ == "__main__":
     main()
