@@ -26,10 +26,12 @@ def read_addresses(csv_filename: str) -> List[Tuple[str, str]]:
         sys.exit(1)
     return addresses
 
-def send_funds(owner_address: str, operator_address: str, amount: str) -> None:
+def send_funds(owner_address: str, operator_address: str, amount: int) -> None:
     """Execute the pocketd send command."""
     load_dotenv()
     network = os.getenv('NETWORK')
+    amount = int(amount) * 1000000
+    
     cmd = [
         'pocketd', 'tx', 'bank', 'send',
         owner_address,
@@ -84,7 +86,7 @@ def main():
     
     for owner_address, operator_address in addresses:
         print(f"\nProcessing transfer from {owner_address} to {operator_address}")
-        send_funds(owner_address, operator_address, amount*1000000)
+        send_funds(owner_address, operator_address, amount)
 
 if __name__ == "__main__":
     main()
