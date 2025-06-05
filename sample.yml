@@ -1,6 +1,6 @@
 owner_address: <owner_address>
 operator_address: <operator_address>
-stake_amount: 1000000upokt
+stake_amount: <stake_amount>upokt
 default_rev_share_percent:
   <owner_address>: 50
   <operator_address>: 50

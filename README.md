@@ -9,8 +9,9 @@ The repository contains the following scripts that should be used in sequence:
 1. `create_accounts.py`: Creates new POKT accounts with mnemonics
 2. `import_operator_to_keyring.py`: Imports operator accounts into the keyring
 3. `stake_operator_wallet.py`: Stakes the operator wallets
-4. `generate_supplier_config.py`: Generates YAML configuration files for suppliers
-5. `stake_from_supplier_config.py`: Executes the final staking step using the generated supplier configurations
+4. `fund_operator_wallets.py`: Transfers funds from owner to operator wallets
+5. `generate_supplier_config.py`: Generates YAML configuration files for suppliers
+6. `stake_from_supplier_config.py`: Executes the final staking step using the generated supplier configurations
 
 ## Install Dependencies
 ```bash
@@ -56,9 +57,22 @@ This script will:
 - Execute stake commands for each operator wallet
 - Requires a `.env` file with `NETWORK` variable set
 
+### 4. Fund Operator Wallets
+```bash
+python fund_operator_wallets.py
+```
+This script will:
+- Read owner and operator addresses from a CSV file
+- Prompt for the amount of upokt to send to each operator
+- Execute fund transfers from owner to operator addresses
+- Requires a `.env` file with `NETWORK` variable set
+- Uses the test keyring backend
+- The CSV file should have columns: `owner_address` and `operator_address`
+
+Note: Make sure the owner accounts have sufficient funds before running this script.
 
 ## Operator
-### 4. Generate Supplier Configurations
+### 5. Generate Supplier Configurations
 ```bash
 python generate_supplier_config.py
 ```
@@ -67,7 +81,7 @@ This script will:
 - Use `morse_to_shannon_service_mapping.csv` for service ID mapping
 - Generate YAML configuration files in the `output` directory
 
-### 5. Stake Using Supplier Configurations
+### 6. Stake Using Supplier Configurations
 ```bash
 python stake_from_supplier_config.py
 ```
@@ -174,6 +188,7 @@ services:
 python create_accounts.py
 python import_operator_to_keyring.py
 python stake_operator_wallet.py
+python fund_operator_wallets.py
 python generate_supplier_config.py
 python stake_from_supplier_config.py  # Run as either owner or operator
 ```

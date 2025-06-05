@@ -17,7 +17,7 @@ def read_wallets(csv_file):
             wallets.append(row)
     return wallets
 
-def generate_stake_config(wallet_data, template_file):
+def generate_stake_config(wallet_data, template_file, stake_amount):
     # Read the template
     with open(template_file, 'r') as f:
         template = f.read()
@@ -25,6 +25,7 @@ def generate_stake_config(wallet_data, template_file):
     # Replace placeholders
     config = template.replace('<owner_address>', wallet_data['owner_address'])
     config = config.replace('<operator_address>', wallet_data['operator_address'])
+    config = config.replace('<stake_amount>', stake_amount)
     
     # Parse as YAML to handle the rev share percentages
     config_dict = yaml.safe_load(config)
@@ -85,13 +86,14 @@ def main():
         return
     
     # Read wallets
-    filename = input("Enter filename to read wallets from: ")
+    filename = input("Enter filename to read wallets from (Case-Sensitive): ")
+    stake_amount = int(input("Enter stake amount in upokt (1POKT=1000000upokt): "))
 	
     wallets = read_wallets(filename)
     
     # Process each wallet
     for wallet in wallets:
-        config_file = generate_stake_config(wallet, 'sample.yml')
+        config_file = generate_stake_config(wallet, 'sample.yml', stake_amount)
         print(f"Generated config file: {config_file}")
         
         try:
