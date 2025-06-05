@@ -25,7 +25,7 @@ def generate_stake_config(wallet_data, template_file, stake_amount):
     # Replace placeholders
     config = template.replace('<owner_address>', wallet_data['owner_address'])
     config = config.replace('<operator_address>', wallet_data['operator_address'])
-    config = config.replace('<stake_amount>', stake_amount)
+    config = config.replace('<stake_amount>', f"{stake_amount}")
     
     # Parse as YAML to handle the rev share percentages
     config_dict = yaml.safe_load(config)
@@ -87,7 +87,7 @@ def main():
     
     # Read wallets
     filename = input("Enter filename to read wallets from (Case-Sensitive): ")
-    stake_amount = input("Enter stake amount in upokt (1POKT=1000000upokt): ")
+    stake_amount = int(input("Enter stake amount in POKT: "))
 	
     wallets = read_wallets(filename)
     
