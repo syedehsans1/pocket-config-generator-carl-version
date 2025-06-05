@@ -63,7 +63,7 @@ python fund_operator_wallets.py
 ```
 This script will:
 - Read owner and operator addresses from a CSV file
-- Prompt for the amount of upokt to send to each operator
+- Prompt for the amount of POKT to send to each operator
 - Execute fund transfers from owner to operator addresses
 - Requires a `.env` file with `NETWORK` variable set
 - Uses the test keyring backend
