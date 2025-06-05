@@ -118,7 +118,7 @@ F004,avax
 ### 3. Environment Variables (`.env`)
 Create a `.env` file with:
 ```
-NETWORK=testnet  # or mainnet
+NETWORK=testnet  # acceptable values are (alpha, beta, main)
 ```
 
 ## Requirements
