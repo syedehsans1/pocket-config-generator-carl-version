@@ -74,6 +74,23 @@ def stake_wallet(wallet_data, config_file, network):
         print(f"Unexpected error: {e}")
         return False
 
+def update_csv_stake_amounts(csv_file, stake_amount):
+    """Update the stake_amount column in the CSV file for all rows."""
+    # Read all rows
+    rows = []
+    with open(csv_file, 'r') as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        for row in reader:
+            row['stake_amount'] = str(stake_amount)
+            rows.append(row)
+    
+    # Write back to the file
+    with open(csv_file, 'w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
 def main():
     # Load environment variables from .env file
     load_dotenv()
@@ -88,7 +105,11 @@ def main():
     # Read wallets
     filename = input("Enter filename to read wallets from (Case-Sensitive): ")
     stake_amount = int(input("Enter stake amount in POKT: "))
-	
+    
+    # Update CSV with stake amounts
+    update_csv_stake_amounts(filename, stake_amount)
+    print(f"Updated stake amounts in {filename}")
+    
     wallets = read_wallets(filename)
     
     # Process each wallet

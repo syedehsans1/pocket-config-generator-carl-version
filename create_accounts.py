@@ -50,7 +50,7 @@ def generate_pocket_accounts(num_accounts, customer_prefix):
     
     # Write the accounts to a CSV file
     with open(output_path, mode="w", newline="") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=["customer_id", "operator_address", "mnemonic", "owner_address", "revshare_address", "publicly_exposed_url"])
+        writer = csv.DictWriter(csvfile, fieldnames=["customer_id", "operator_address", "mnemonic", "owner_address", "revshare_address", "publicly_exposed_url", "stake_amount"])
         writer.writeheader()
         writer.writerows(accounts)
     
