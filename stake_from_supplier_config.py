@@ -24,7 +24,7 @@ def stake_wallet(config_file, network, is_owner):
     
     # First address is owner, second address is revshare
     owner_address = rev_share_addresses[0]
-    revshare_address = rev_share_addresses[1]
+    revshare_address = config_data['operator_address']
     
     # Use owner address if user is owner, otherwise use revshare address
     from_address = owner_address if is_owner else revshare_address

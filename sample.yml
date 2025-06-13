@@ -3,7 +3,7 @@ operator_address: <operator_address>
 stake_amount: <stake_amount>upokt
 default_rev_share_percent:
   <owner_address>: 50
-  <operator_address>: 50
+  <revshare_address>: 50
 services:
   - service_id: "anvil"
     endpoints:
