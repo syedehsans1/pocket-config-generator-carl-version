@@ -93,7 +93,7 @@ def main():
 		yaml_data = {
 			'owner_address': wallet_info['owner_address'],
 			'operator_address': wallet_info['operator_address'],
-			'stake_amount': f'{int(wallet_info['stake_amount']) * 1000000}upokt',
+			'stake_amount': f"{int(wallet_info['stake_amount']) * 1000000}upokt",
 			'default_rev_share_percent': {
 				wallet_info['owner_address']: 50,
 				wallet_info['revshare_address']: 50
