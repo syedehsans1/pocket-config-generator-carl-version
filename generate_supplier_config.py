@@ -22,6 +22,7 @@ def load_wallet_data():
 		return {row['customer_id']: {
 			'operator_address': row['operator_address'],
 			'owner_address': row['owner_address'],
+			'stake_amount': row['stake_amount'],
 			'revshare_address': row['revshare_address'],
 			'publicly_exposed_url': row['publicly_exposed_url'] if pd.notna(row['publicly_exposed_url']) else 'https://relayminer.example.com'
 		} for _, row in wallets_df.iterrows()}
