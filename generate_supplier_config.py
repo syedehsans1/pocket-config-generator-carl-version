@@ -95,7 +95,7 @@ def main():
 			'stake_amount': '1000000upokt',
 			'default_rev_share_percent': {
 				wallet_info['owner_address']: 50,
-				wallet_info['operator_address']: 50
+				wallet_info['revshare_address']: 50
 			},
 			'services': []
 		}
