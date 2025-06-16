@@ -12,6 +12,7 @@ The repository contains the following scripts that should be used in sequence:
 4. `fund_operator_wallets.py`: Transfers funds from owner to operator wallets
 5. `generate_supplier_config.py`: Generates YAML configuration files for suppliers
 6. `stake_from_supplier_config.py`: Executes the final staking step using the generated supplier configurations
+7. `extract_accounts_to_csv.py`: Extracts account data from JSON to CSV format
 
 ## Install Dependencies
 ```bash
@@ -79,7 +80,11 @@ python generate_supplier_config.py
 This script will:
 - Process `NodeAllocation.csv` for node allocations
 - Use `morse_to_shannon_service_mapping.csv` for service ID mapping
+- Prompt for revshare percentage for the revshare address
 - Generate YAML configuration files in the `output` directory
+- Set revshare distribution based on the input percentage:
+  - If revshare percentage is 100%, owner gets 0% and operator gets 1%
+  - Otherwise, owner gets (99 - revshare_pct)% and operator gets 1%
 
 ### 6. Stake Using Supplier Configurations
 ```bash
@@ -97,6 +102,15 @@ Note: This final step can be performed by either the owner or operator:
 - If run as operator: Uses the operator address for staking
 - The script will automatically select the correct address based on your role
 
+### 7. Extract Account Data (Optional)
+```bash
+python extract_accounts_to_csv.py
+```
+This script will:
+- Prompt for the JSON file name containing migration exported customer accounts
+- Extract shannon addresses, private keys, and morse node addresses
+- Save the extracted data to `extracted_accounts.csv`
+- Handle errors gracefully for file not found or invalid JSON
 
 ## Required Files
 
@@ -135,6 +149,24 @@ Create a `.env` file with:
 NETWORK=testnet  # acceptable values are (alpha, beta, main)
 ```
 
+### 4. Account Data JSON (Optional)
+If using `extract_accounts_to_csv.py`, provide a JSON file with the following structure:
+```json
+{
+  "mappings": [
+    {
+      "shannon": {
+        "address": "pokt1...",
+        "private_key": "..."
+      },
+      "migration_msg": {
+        "morse_node_address": "..."
+      }
+    }
+  ]
+}
+```
+
 ## Requirements
 
 - Python 3.x
@@ -166,14 +198,14 @@ owner_address: "1"
 operator_address: "1_operator_test"  # From CSV if available, otherwise default
 stake_amount: "1000000upokt"
 default_rev_share_percent:
-  "1": 50
-  "1_operator": 50
+  "owner_address": <calculated_percentage>  # Based on revshare input
+  "revshare_address": <input_percentage>    # User-provided revshare percentage
+  "operator_address": 1                     # Fixed at 1% unless revshare is 100%
 services:
   - service_id: "avax"  # Shannon Service ID from mapping
     endpoints:
       - publicly_exposed_url: "https://relayminer1.example.com"  # From CSV if available
         rpc_type: "JSON_RPC"  # From CSV if available
-    # rev_share_percent will be added for non-HTC nodes
 ```
 
 ## Usage

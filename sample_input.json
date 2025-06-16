@@ -1,0 +1,181 @@
+{
+  "mappings": [
+    {
+      "morse": {
+        "address": "92d33e643e8e62083bd199214676b13df35976d4",
+        "private_key": "4627130abbf5eba7d1e2a407eba108136591d68a6962f31e30c382259ddaa63047f5909a1e53b1748b761e1f7a1a96667e3fc8de81d6b69c430947952c59e39b"
+      },
+      "shannon": {
+        "address": "pokt1ermmfrqsypzgffxq2rmpw00h75894ax06frrnr",
+        "private_key": "078484c2aaa4ace3588b79e5006809ebd61c03c03ce354ec590f407f17745a1c"
+      },
+      "migration_msg": {
+        "shannon_signing_address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+        "shannon_owner_address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+        "shannon_operator_address": "pokt1ermmfrqsypzgffxq2rmpw00h75894ax06frrnr",
+        "morse_node_address": "92D33E643E8E62083BD199214676B13DF35976D4",
+        "morse_public_key": "R/WQmh5TsXSLdh4fehqWZn4/yN6B1racQwlHlSxZ45s=",
+        "morse_signature": "YClWWF8hgdcDsYdT83bVhdLyW2WG75gZr8OfuqubndTeZI9BEa3MUL2SqZaWx7v2JHZlqoBYW2tofINOFkTFCQ==",
+        "signer_is_output_address": false,
+        "services": [
+          {
+            "service_id": "bsc",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "tron",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "poly",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "iotex",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "moonbeam",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "moonriver",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "radix",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          },
+          {
+            "service_id": "zklink_nova",
+            "endpoints": [
+              {
+                "url": "https://relay.to.stakenodes.org",
+                "rpc_type": 3
+              }
+            ],
+            "rev_share": [
+              {
+                "address": "pokt1x9qhs9m9sd7dzgr3vg0jrsqyg2xzj2utax3q0p",
+                "rev_share_percentage": 75
+              },
+              {
+                "address": "pokt17wtvsnpyvuyksccm3mn04cng68xqlthxfpmmgj",
+                "rev_share_percentage": 25
+              }
+            ]
+          }
+        ]
+      },
+      "error": ""
+    }
+  ],
+  "error": "",
+  "tx_hash": "170EEA84068F495A49407B5325EA59E18643F234FFA4C72ACCEB4F20A115E405",
+  "tx_code": 0
+}
