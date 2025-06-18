@@ -1,0 +1,29 @@
+services:
+- service_id: eth
+  endpoints:
+  - publicly_exposed_url: https://new-relay.example.com
+    rpc_type: JSON_RPC
+  rev_share_percent:
+    pokt1xplnqcgqpahguzw474xy2jq6s4qrmawn6llz66: 60
+    pokt1es4zueg4hkgdyfz6zthg44t62v6wum4l78ft7m: 40
+- service_id: bsc
+  endpoints:
+  - publicly_exposed_url: https://new-relay.example.com
+    rpc_type: JSON_RPC
+  rev_share_percent:
+    pokt1xplnqcgqpahguzw474xy2jq6s4qrmawn6llz66: 60
+    pokt1es4zueg4hkgdyfz6zthg44t62v6wum4l78ft7m: 40
+- service_id: polygon
+  endpoints:
+  - publicly_exposed_url: https://new-relay.example.com
+    rpc_type: JSON_RPC
+  rev_share_percent:
+    pokt1xplnqcgqpahguzw474xy2jq6s4qrmawn6llz66: 60
+    pokt1es4zueg4hkgdyfz6zthg44t62v6wum4l78ft7m: 40
+- service_id: avax
+  endpoints:
+  - publicly_exposed_url: https://new-relay.example.com
+    rpc_type: JSON_RPC
+  rev_share_percent:
+    pokt1xplnqcgqpahguzw474xy2jq6s4qrmawn6llz66: 60
+    pokt1es4zueg4hkgdyfz6zthg44t62v6wum4l78ft7m: 40 

@@ -13,6 +13,7 @@ The repository contains the following scripts that should be used in sequence:
 5. `generate_supplier_config.py`: Generates YAML configuration files for suppliers
 6. `stake_from_supplier_config.py`: Executes the final staking step using the generated supplier configurations
 7. `extract_accounts_to_csv.py`: Extracts account data from JSON to CSV format
+8. `override_customer_services_config_files.py`: Updates customer config YAML files with new services from an override file
 
 ## Install Dependencies
 ```bash
@@ -111,6 +112,39 @@ This script will:
 - Extract shannon addresses, private keys, and morse node addresses
 - Save the extracted data to `extracted_accounts.csv`
 - Handle errors gracefully for file not found or invalid JSON
+
+### 8. Override Customer Services (Optional)
+```bash
+python override_customer_services_config_files.py
+```
+This script will:
+- Prompt for the folder path containing customer config YAML files
+- Prompt for the path to the override YAML file containing new services
+- Show a preview of all files that will be processed
+- Ask for confirmation before making changes
+- Update all YAML files by replacing their services section with the override services
+- Preserve all other configuration data (owner_address, operator_address, stake_amount, etc.)
+
+**Use Case**: This script is useful when you need to update the services configuration across multiple customer config files without regenerating them from scratch.
+
+**Override File Format**: The override YAML file should contain only the `services` section:
+```yaml
+services:
+- service_id: eth
+  endpoints:
+  - publicly_exposed_url: https://new-relay.example.com
+    rpc_type: JSON_RPC
+  rev_share_percent:
+    pokt1xplnqcgqpahguzw474xy2jq6s4qrmawn6llz66: 60
+    pokt1es4zueg4hkgdyfz6zthg44t62v6wum4l78ft7m: 40
+- service_id: bsc
+  endpoints:
+  - publicly_exposed_url: https://new-relay.example.com
+    rpc_type: JSON_RPC
+  rev_share_percent:
+    pokt1xplnqcgqpahguzw474xy2jq6s4qrmawn6llz66: 60
+    pokt1es4zueg4hkgdyfz6zthg44t62v6wum4l78ft7m: 40
+```
 
 ## Required Files
 

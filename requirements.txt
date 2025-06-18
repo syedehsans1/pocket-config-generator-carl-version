@@ -4,3 +4,4 @@ cosmpy>=0.8.0
 mnemonic>=0.20
 hdwallet>=2.0.0 
 dotenv>=0.9.9
+requests>=2.31.0
