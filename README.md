@@ -78,14 +78,66 @@ Note: Make sure the owner accounts have sufficient funds before running this scr
 ```bash
 python generate_supplier_config.py
 ```
-This script will:
-- Process `NodeAllocation.csv` for node allocations
-- Use `morse_to_shannon_service_mapping.csv` for service ID mapping
-- Prompt for revshare percentage for the revshare address
-- Generate YAML configuration files in the `output` directory
-- Set revshare distribution based on the input percentage:
-  - If revshare percentage is 100%, owner gets 0% and operator gets 1%
-  - Otherwise, owner gets (99 - revshare_pct)% and operator gets 1%
+
+This script generates YAML configuration files for POKT suppliers based on node allocations and existing supplier data from the POKT network API.
+
+#### What it does:
+- **Fetches supplier information** from the POKT network API using operator addresses
+- **Processes node allocation data** from a CSV file provided by PNF (POKT Network Foundation)
+- **Maps service IDs** from Morse Chain IDs to Shannon Service IDs
+- **Generates YAML configurations** for each supplier with proper revenue sharing setup
+- **Preserves existing services** from the API response
+- **Creates output files** in the `output/` directory
+
+#### Required Inputs:
+1. **CSV file with operator addresses**: Contains a column named `operator_address` with the operator addresses to process
+2. **Node allocation CSV**: The CSV file received from PNF with F-Chains node allocations
+3. **Revshare percentage**: The percentage to allocate to the revshare address
+4. **Service mapping file**: `morse_to_shannon_service_mapping.csv` (must be in the same directory)
+
+#### Key Features:
+- **API Integration**: Fetches real-time supplier data from the POKT network API
+- **Revenue Sharing**: Automatically configures revenue sharing based on node types:
+  - **HTC nodes**: No special revenue sharing (uses default configuration)
+  - **LTailC nodes**: 100% revenue goes to the revshare address
+- **Service Preservation**: Maintains existing services from the API response
+- **Error Handling**: Gracefully handles API failures and missing data
+- **Rate Limiting**: Includes delays between API calls to avoid overwhelming the server
+
+#### Output Structure:
+Each generated YAML file contains:
+```yaml
+owner_address: "pokt1..."
+operator_address: "pokt1..."
+stake_amount: "1000000000upokt"
+default_rev_share_percent:
+  owner_address: 0  # or calculated percentage
+  revshare_address: 60  # user-specified percentage
+  operator_address: 1  # or calculated percentage
+services:
+  - service_id: "avax"
+    endpoints:
+      - publicly_exposed_url: "https://relayminer.example.com"
+        rpc_type: "JSON_RPC"
+    rev_share_percent:  # Only for LTailC nodes
+      revshare_address: 100
+```
+
+#### Revenue Sharing Logic:
+- If revshare percentage is 100%:
+  - Owner gets 0%
+  - Operator gets 1%
+  - Revshare address gets 99%
+- Otherwise:
+  - Owner gets (99 - revshare_pct)%
+  - Operator gets 1%
+  - Revshare address gets the specified percentage
+
+#### Error Handling:
+- Skips operators with API fetch failures
+- Warns about missing service mappings
+- Continues processing even if some operators fail
+- Provides detailed error messages for debugging
 
 ### 6. Stake Using Supplier Configurations
 ```bash
